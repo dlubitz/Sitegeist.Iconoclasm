@@ -18,6 +18,7 @@ class Package extends BasePackage
     public function boot(Bootstrap $bootstrap)
     {
         $dispatcher = $bootstrap->getSignalSlotDispatcher();
+        $dispatcher->connect(ThumbnailService::class, 'thumbnailCreated', ThumbnailOptimizationService::class, 'optimizeThumbnail');
         $dispatcher->connect(ThumbnailService::class, 'thumbnailRefreshed', ThumbnailOptimizationService::class, 'optimizeThumbnail');
     }
 }
